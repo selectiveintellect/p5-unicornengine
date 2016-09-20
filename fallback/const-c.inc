@@ -459,49 +459,88 @@ constant_17 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      UC_ERR_FETCH_PROT UC_ERR_HOOK_EXIST UC_ERR_WRITE_PROT UC_HOOK_MEM_FETCH
-     UC_HOOK_MEM_WRITE UC_MEM_FETCH_PROT UC_MEM_WRITE_PROT */
-  /* Offset 8 gives the best switch position.  */
-  switch (name[8]) {
-  case 'E':
-    if (memEQ(name, "UC_ERR_FETCH_PROT", 17)) {
-    /*                       ^               */
-      *iv_return = UC_ERR_FETCH_PROT;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "UC_MEM_FETCH_PROT", 17)) {
-    /*                       ^               */
-      *iv_return = UC_MEM_FETCH_PROT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'M':
+     UC_HOOK_MEM_VALID UC_HOOK_MEM_WRITE UC_MEM_FETCH_PROT UC_MEM_WRITE_PROT */
+  /* Offset 15 gives the best switch position.  */
+  switch (name[15]) {
+  case 'C':
     if (memEQ(name, "UC_HOOK_MEM_FETCH", 17)) {
-    /*                       ^               */
+    /*                              ^        */
       *iv_return = UC_HOOK_MEM_FETCH;
       return PERL_constant_ISIV;
     }
-    if (memEQ(name, "UC_HOOK_MEM_WRITE", 17)) {
-    /*                       ^               */
-      *iv_return = UC_HOOK_MEM_WRITE;
+    break;
+  case 'I':
+    if (memEQ(name, "UC_HOOK_MEM_VALID", 17)) {
+    /*                              ^        */
+      *iv_return = UC_HOOK_MEM_VALID;
       return PERL_constant_ISIV;
     }
     break;
   case 'O':
+    if (memEQ(name, "UC_ERR_FETCH_PROT", 17)) {
+    /*                              ^        */
+      *iv_return = UC_ERR_FETCH_PROT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "UC_ERR_WRITE_PROT", 17)) {
+    /*                              ^        */
+      *iv_return = UC_ERR_WRITE_PROT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "UC_MEM_FETCH_PROT", 17)) {
+    /*                              ^        */
+      *iv_return = UC_MEM_FETCH_PROT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "UC_MEM_WRITE_PROT", 17)) {
+    /*                              ^        */
+      *iv_return = UC_MEM_WRITE_PROT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'S':
     if (memEQ(name, "UC_ERR_HOOK_EXIST", 17)) {
-    /*                       ^               */
+    /*                              ^        */
       *iv_return = UC_ERR_HOOK_EXIST;
       return PERL_constant_ISIV;
     }
     break;
-  case 'R':
-    if (memEQ(name, "UC_ERR_WRITE_PROT", 17)) {
-    /*                       ^               */
-      *iv_return = UC_ERR_WRITE_PROT;
+  case 'T':
+    if (memEQ(name, "UC_HOOK_MEM_WRITE", 17)) {
+    /*                              ^        */
+      *iv_return = UC_HOOK_MEM_WRITE;
       return PERL_constant_ISIV;
     }
-    if (memEQ(name, "UC_MEM_WRITE_PROT", 17)) {
-    /*                       ^               */
-      *iv_return = UC_MEM_WRITE_PROT;
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
+constant_20 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     UC_ERR_READ_UNMAPPED UC_HOOK_MEM_UNMAPPED UC_MEM_READ_UNMAPPED */
+  /* Offset 5 gives the best switch position.  */
+  switch (name[5]) {
+  case 'M':
+    if (memEQ(name, "UC_MEM_READ_UNMAPPED", 20)) {
+    /*                    ^                     */
+      *iv_return = UC_MEM_READ_UNMAPPED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'O':
+    if (memEQ(name, "UC_HOOK_MEM_UNMAPPED", 20)) {
+    /*                    ^                     */
+      *iv_return = UC_HOOK_MEM_UNMAPPED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'R':
+    if (memEQ(name, "UC_ERR_READ_UNMAPPED", 20)) {
+    /*                    ^                     */
+      *iv_return = UC_ERR_READ_UNMAPPED;
       return PERL_constant_ISIV;
     }
     break;
@@ -604,6 +643,39 @@ constant_22 (pTHX_ const char *name, IV *iv_return) {
 }
 
 static int
+constant_25 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     UC_HOOK_MEM_FETCH_INVALID UC_HOOK_MEM_READ_UNMAPPED
+     UC_HOOK_MEM_WRITE_INVALID */
+  /* Offset 12 gives the best switch position.  */
+  switch (name[12]) {
+  case 'F':
+    if (memEQ(name, "UC_HOOK_MEM_FETCH_INVALID", 25)) {
+    /*                           ^                   */
+      *iv_return = UC_HOOK_MEM_FETCH_INVALID;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'R':
+    if (memEQ(name, "UC_HOOK_MEM_READ_UNMAPPED", 25)) {
+    /*                           ^                   */
+      *iv_return = UC_HOOK_MEM_READ_UNMAPPED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'W':
+    if (memEQ(name, "UC_HOOK_MEM_WRITE_INVALID", 25)) {
+    /*                           ^                   */
+      *iv_return = UC_HOOK_MEM_WRITE_INVALID;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
 constant (pTHX_ const char *name, STRLEN len, IV *iv_return) {
   /* Initially switch on the length of the name.  */
   /* When generated this function returned values for the list of names given
@@ -656,12 +728,18 @@ my @names = (qw(),
             {name=>"UC_HOOK_INSN", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_INTR", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_FETCH", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_FETCH_INVALID", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_FETCH_PROT", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_FETCH_UNMAPPED", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_INVALID", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_READ", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_READ_INVALID", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_READ_PROT", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_READ_UNMAPPED", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_UNMAPPED", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_VALID", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_WRITE", type=>"IV", macro=>"1"},
+            {name=>"UC_HOOK_MEM_WRITE_INVALID", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_WRITE_PROT", type=>"IV", macro=>"1"},
             {name=>"UC_HOOK_MEM_WRITE_UNMAPPED", type=>"IV", macro=>"1"},
             {name=>"UC_MEM_FETCH", type=>"IV", macro=>"1"},
@@ -763,31 +841,28 @@ __END__
     }
     break;
   case 19:
-    if (memEQ(name, "UC_ERR_INSN_INVALID", 19)) {
-      *iv_return = UC_ERR_INSN_INVALID;
-      return PERL_constant_ISIV;
+    /* Names all of length 19.  */
+    /* UC_ERR_INSN_INVALID UC_HOOK_MEM_INVALID */
+    /* Offset 8 gives the best switch position.  */
+    switch (name[8]) {
+    case 'M':
+      if (memEQ(name, "UC_HOOK_MEM_INVALID", 19)) {
+      /*                       ^                 */
+        *iv_return = UC_HOOK_MEM_INVALID;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'N':
+      if (memEQ(name, "UC_ERR_INSN_INVALID", 19)) {
+      /*                       ^                 */
+        *iv_return = UC_ERR_INSN_INVALID;
+        return PERL_constant_ISIV;
+      }
+      break;
     }
     break;
   case 20:
-    /* Names all of length 20.  */
-    /* UC_ERR_READ_UNMAPPED UC_MEM_READ_UNMAPPED */
-    /* Offset 5 gives the best switch position.  */
-    switch (name[5]) {
-    case 'M':
-      if (memEQ(name, "UC_MEM_READ_UNMAPPED", 20)) {
-      /*                    ^                     */
-        *iv_return = UC_MEM_READ_UNMAPPED;
-        return PERL_constant_ISIV;
-      }
-      break;
-    case 'R':
-      if (memEQ(name, "UC_ERR_READ_UNMAPPED", 20)) {
-      /*                    ^                     */
-        *iv_return = UC_ERR_READ_UNMAPPED;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_20 (aTHX_ name, iv_return);
     break;
   case 21:
     return constant_21 (aTHX_ name, iv_return);
@@ -795,11 +870,14 @@ __END__
   case 22:
     return constant_22 (aTHX_ name, iv_return);
     break;
-  case 25:
-    if (memEQ(name, "UC_HOOK_MEM_READ_UNMAPPED", 25)) {
-      *iv_return = UC_HOOK_MEM_READ_UNMAPPED;
+  case 24:
+    if (memEQ(name, "UC_HOOK_MEM_READ_INVALID", 24)) {
+      *iv_return = UC_HOOK_MEM_READ_INVALID;
       return PERL_constant_ISIV;
     }
+    break;
+  case 25:
+    return constant_25 (aTHX_ name, iv_return);
     break;
   case 26:
     /* Names all of length 26.  */

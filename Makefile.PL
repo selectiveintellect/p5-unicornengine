@@ -124,7 +124,14 @@ if  (eval {require ExtUtils::Constant; 1}) {
               {name=>"UC_PROT_EXEC", macro=>"1"},
               {name=>"UC_PROT_ALL", macro=>"1"},
               {name=>"UC_QUERY_MODE", macro=>"1"},
-              {name=>"UC_QUERY_PAGE_SIZE", macro=>"1"});
+              {name=>"UC_QUERY_PAGE_SIZE", macro=>"1"},
+              {name=>"UC_HOOK_MEM_UNMAPPED", macro=>"1"},
+              {name=>"UC_HOOK_MEM_READ_INVALID", macro=>"1"},
+              {name=>"UC_HOOK_MEM_WRITE_INVALID", macro=>"1"},
+              {name=>"UC_HOOK_MEM_FETCH_INVALID", macro=>"1"},
+              {name=>"UC_HOOK_MEM_INVALID", macro=>"1"},
+              {name=>"UC_HOOK_MEM_VALID", macro=>"1"},
+          );
   ExtUtils::Constant::WriteConstants(
                                      NAME         => 'UnicornEngine',
                                      NAMES        => \@names,
