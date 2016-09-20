@@ -220,6 +220,25 @@ XSLoader::load('UnicornEngine', $VERSION);
 
 # Preloaded methods go here.
 
+sub new {
+    my $cls = shift;
+    my $class = ref($cls) || $cls;
+    my %args = @_;
+    my $self = bless({%args}, $class);
+    unless ($args{arch} and $args{mode}) {
+        warn "You need to specify the 'arch' and 'mode' arguments to this function";
+        return undef;
+    }
+    my $obj = uc_perl_new($self, $args{arch}, $args{mode});
+    $self->{uc_perl} = $obj;
+    return $self;
+}
+
+sub DESTROY {
+    uc_perl_DESTROY($_[0]->{uc_perl}) if $_[0]->{uc_perl};
+}
+
+
 # Autoload methods go after =cut, and are processed by the autosplit program.
 
 1;

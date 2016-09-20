@@ -54,5 +54,8 @@ ok(&UnicornEngine::is_arch_supported(UC_ARCH_ARM) == 1, 'ARM is supported');
 note &UnicornEngine::version();
 is(&UnicornEngine::version(), '1.0', 'Version is 1.0');
 
+is(UnicornEngine->new(), undef, 'UnicornEngine object not created if arch/mode not specified');
+my $uce = new_ok('UnicornEngine', [ arch => UC_ARCH_X86, mode => UC_MODE_64 ]);
+
 done_testing();
 __END__

@@ -1,5 +1,6 @@
 TYPEMAP
 
+uc_perl_t * T_PTROBJ
 uc_engine * T_PTROBJ
 uc_mem_region * T_PTROBJ
 uc_query_type T_ENUM
