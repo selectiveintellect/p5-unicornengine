@@ -70,3 +70,9 @@ tags
 _alien
 _share
 include
+\.bak$
+\.old$
+\.bs$
+\.bso
+UnicornEngine.c
+\.o$
