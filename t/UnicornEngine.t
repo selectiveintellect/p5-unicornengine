@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More;
 BEGIN { use_ok('UnicornEngine') };
 
 
@@ -50,3 +50,7 @@ ok( $fail == 0 , 'Constants' );
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
+ok(&UnicornEngine::is_arch_supported(UC_ARCH_ARM) == 1, 'ARM is supported');
+
+done_testing();
+__END__
