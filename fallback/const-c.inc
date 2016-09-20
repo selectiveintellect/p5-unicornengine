@@ -31,50 +31,78 @@ constant_10 (pTHX_ const char *name, IV *iv_return) {
   case '2':
     if (memEQ(name, "UC_MODE_3", 9)) {
     /*                        2     */
+#ifdef 1 << 2
       *iv_return = UC_MODE_32;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '4':
     if (memEQ(name, "UC_MODE_6", 9)) {
     /*                        4     */
+#ifdef 1 << 3
       *iv_return = UC_MODE_64;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '6':
     if (memEQ(name, "UC_MODE_1", 9)) {
     /*                        6     */
+#ifdef 1 << 1
       *iv_return = UC_MODE_16;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '8':
     if (memEQ(name, "UC_MODE_V", 9)) {
     /*                        8     */
+#ifdef 1 << 6
       *iv_return = UC_MODE_V8;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '9':
     if (memEQ(name, "UC_MODE_V", 9)) {
     /*                        9     */
+#ifdef 1 << 4
       *iv_return = UC_MODE_V9;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'G':
     if (memEQ(name, "UC_ERR_AR", 9)) {
     /*                        G     */
+#ifdef 15
       *iv_return = UC_ERR_ARG;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'P':
     if (memEQ(name, "UC_ERR_MA", 9)) {
     /*                        P     */
+#ifdef 11
       *iv_return = UC_ERR_MAP;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -92,50 +120,78 @@ constant_11 (pTHX_ const char *name, IV *iv_return) {
   case '6':
     if (memEQ(name, "UC_ARCH_X8", 10)) {
     /*                         6      */
+#ifdef 4
       *iv_return = UC_ARCH_X86;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'C':
     if (memEQ(name, "UC_ARCH_PP", 10)) {
     /*                         C      */
+#ifdef 5
       *iv_return = UC_ARCH_PPC;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'D':
     if (memEQ(name, "UC_MEM_REA", 10)) {
     /*                         D      */
+#ifdef 16
       *iv_return = UC_MEM_READ;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'E':
     if (memEQ(name, "UC_ERR_MOD", 10)) {
     /*                         E      */
+#ifdef 4
       *iv_return = UC_ERR_MODE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'H':
     if (memEQ(name, "UC_ERR_ARC", 10)) {
     /*                         H      */
+#ifdef 2
       *iv_return = UC_ERR_ARCH;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'K':
     if (memEQ(name, "UC_ERR_HOO", 10)) {
     /*                         K      */
+#ifdef 9
       *iv_return = UC_ERR_HOOK;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'L':
     if (memEQ(name, "UC_PROT_AL", 10)) {
     /*                         L      */
+#ifdef 7
       *iv_return = UC_PROT_ALL;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'M':
@@ -146,20 +202,32 @@ constant_11 (pTHX_ const char *name, IV *iv_return) {
     }
     if (memEQ(name, "UC_MODE_AR", 10)) {
     /*                         M      */
+#if 0
       *iv_return = UC_MODE_ARM;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'X':
     if (memEQ(name, "UC_ARCH_MA", 10)) {
     /*                         X      */
+#ifdef 8
       *iv_return = UC_ARCH_MAX;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MODE_QP", 10)) {
     /*                         X      */
+#ifdef 1 << 4
       *iv_return = UC_MODE_QPX;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -178,8 +246,12 @@ constant_12 (pTHX_ const char *name, IV *iv_return) {
   case '8':
     if (memEQ(name, "UC_ARCH_M68K", 12)) {
     /*                         ^        */
+#ifdef 7
       *iv_return = UC_ARCH_M68K;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'A':
@@ -192,15 +264,23 @@ constant_12 (pTHX_ const char *name, IV *iv_return) {
   case 'C':
     if (memEQ(name, "UC_MEM_FETCH", 12)) {
     /*                         ^        */
+#ifdef 18
       *iv_return = UC_MEM_FETCH;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'D':
     if (memEQ(name, "UC_HOOK_CODE", 12)) {
     /*                         ^        */
+#ifdef 1 << 2
       *iv_return = UC_HOOK_CODE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'E':
@@ -211,41 +291,65 @@ constant_12 (pTHX_ const char *name, IV *iv_return) {
     }
     if (memEQ(name, "UC_PROT_EXEC", 12)) {
     /*                         ^        */
+#ifdef 4
       *iv_return = UC_PROT_EXEC;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'N':
     if (memEQ(name, "UC_PROT_NONE", 12)) {
     /*                         ^        */
+#if 0
       *iv_return = UC_PROT_NONE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'P':
     if (memEQ(name, "UC_ARCH_MIPS", 12)) {
     /*                         ^        */
+#ifdef 3
       *iv_return = UC_ARCH_MIPS;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'S':
     if (memEQ(name, "UC_HOOK_INSN", 12)) {
     /*                         ^        */
+#ifdef 1 << 1
       *iv_return = UC_HOOK_INSN;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'T':
     if (memEQ(name, "UC_HOOK_INTR", 12)) {
     /*                         ^        */
+#ifdef 1 << 0
       *iv_return = UC_HOOK_INTR;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_WRITE", 12)) {
     /*                         ^        */
+#ifdef 17
       *iv_return = UC_MEM_WRITE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -264,27 +368,43 @@ constant_13 (pTHX_ const char *name, IV *iv_return) {
   case '3':
     if (memEQ(name, "UC_MODE_PPC32", 13)) {
     /*                          ^        */
+#ifdef 1 << 2
       *iv_return = UC_MODE_PPC32;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '6':
     if (memEQ(name, "UC_ARCH_ARM64", 13)) {
     /*                          ^        */
+#ifdef 2
       *iv_return = UC_ARCH_ARM64;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MODE_PPC64", 13)) {
     /*                          ^        */
+#ifdef 1 << 3
       *iv_return = UC_MODE_PPC64;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'C':
     if (memEQ(name, "UC_HOOK_BLOCK", 13)) {
     /*                          ^        */
+#ifdef 1 << 3
       *iv_return = UC_HOOK_BLOCK;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'D':
@@ -297,41 +417,65 @@ constant_13 (pTHX_ const char *name, IV *iv_return) {
   case 'L':
     if (memEQ(name, "UC_ERR_HANDLE", 13)) {
     /*                          ^        */
+#ifdef 3
       *iv_return = UC_ERR_HANDLE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'M':
     if (memEQ(name, "UC_MODE_THUMB", 13)) {
     /*                          ^        */
+#ifdef 1 << 4
       *iv_return = UC_MODE_THUMB;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'R':
     if (memEQ(name, "UC_ARCH_SPARC", 13)) {
     /*                          ^        */
+#ifdef 6
       *iv_return = UC_ARCH_SPARC;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MODE_MICRO", 13)) {
     /*                          ^        */
+#ifdef 1 << 4
       *iv_return = UC_MODE_MICRO;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'S':
     if (memEQ(name, "UC_MODE_MIPS3", 13)) {
     /*                          ^        */
+#ifdef 1 << 5
       *iv_return = UC_MODE_MIPS3;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'T':
     if (memEQ(name, "UC_PROT_WRITE", 13)) {
     /*                          ^        */
+#ifdef 2
       *iv_return = UC_PROT_WRITE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -348,29 +492,45 @@ constant_14 (pTHX_ const char *name, IV *iv_return) {
   case '3':
     if (memEQ(name, "UC_MODE_MIPS32", 14)) {
     /*                           ^        */
+#ifdef 1 << 2
       *iv_return = UC_MODE_MIPS32;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '6':
     if (memEQ(name, "UC_MODE_MIPS64", 14)) {
     /*                           ^        */
+#ifdef 1 << 3
       *iv_return = UC_MODE_MIPS64;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'O':
     if (memEQ(name, "UC_ERR_VERSION", 14)) {
     /*                           ^        */
+#ifdef 5
       *iv_return = UC_ERR_VERSION;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'S':
     if (memEQ(name, "UC_MODE_MCLASS", 14)) {
     /*                           ^        */
+#ifdef 1 << 5
       *iv_return = UC_MODE_MCLASS;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -387,22 +547,34 @@ constant_15 (pTHX_ const char *name, IV *iv_return) {
   case '3':
     if (memEQ(name, "UC_MODE_SPARC32", 15)) {
     /*                            ^        */
+#ifdef 1 << 2
       *iv_return = UC_MODE_SPARC32;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '6':
     if (memEQ(name, "UC_MODE_SPARC64", 15)) {
     /*                            ^        */
+#ifdef 1 << 3
       *iv_return = UC_MODE_SPARC64;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'C':
     if (memEQ(name, "UC_ERR_RESOURCE", 15)) {
     /*                            ^        */
+#ifdef 20
       *iv_return = UC_ERR_RESOURCE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -420,34 +592,54 @@ constant_16 (pTHX_ const char *name, IV *iv_return) {
   case 'A':
     if (memEQ(name, "UC_ERR_READ_PROT", 16)) {
     /*                        ^             */
+#ifdef 13
       *iv_return = UC_ERR_READ_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_READ_PROT", 16)) {
     /*                        ^             */
+#ifdef 23
       *iv_return = UC_MEM_READ_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'C':
     if (memEQ(name, "UC_ERR_EXCEPTION", 16)) {
     /*                        ^             */
+#ifdef 21
       *iv_return = UC_ERR_EXCEPTION;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'E':
     if (memEQ(name, "UC_HOOK_MEM_READ", 16)) {
     /*                        ^             */
+#ifdef 1 << 10
       *iv_return = UC_HOOK_MEM_READ;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'I':
     if (memEQ(name, "UC_MODE_MIPS32R6", 16)) {
     /*                        ^             */
+#ifdef 1 << 6
       *iv_return = UC_MODE_MIPS32R6;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -465,44 +657,72 @@ constant_17 (pTHX_ const char *name, IV *iv_return) {
   case 'E':
     if (memEQ(name, "UC_ERR_FETCH_PROT", 17)) {
     /*                       ^               */
+#ifdef 14
       *iv_return = UC_ERR_FETCH_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_FETCH_PROT", 17)) {
     /*                       ^               */
+#ifdef 24
       *iv_return = UC_MEM_FETCH_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'M':
     if (memEQ(name, "UC_HOOK_MEM_FETCH", 17)) {
     /*                       ^               */
+#ifdef 1 << 12
       *iv_return = UC_HOOK_MEM_FETCH;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_HOOK_MEM_WRITE", 17)) {
     /*                       ^               */
+#ifdef 1 << 11
       *iv_return = UC_HOOK_MEM_WRITE;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'O':
     if (memEQ(name, "UC_ERR_HOOK_EXIST", 17)) {
     /*                       ^               */
+#ifdef 19
       *iv_return = UC_ERR_HOOK_EXIST;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'R':
     if (memEQ(name, "UC_ERR_WRITE_PROT", 17)) {
     /*                       ^               */
+#ifdef 12
       *iv_return = UC_ERR_WRITE_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_WRITE_PROT", 17)) {
     /*                       ^               */
+#ifdef 22
       *iv_return = UC_MEM_WRITE_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -521,44 +741,72 @@ constant_21 (pTHX_ const char *name, IV *iv_return) {
   case 'F':
     if (memEQ(name, "UC_ERR_FETCH_UNMAPPED", 21)) {
     /*                      ^                    */
+#ifdef 8
       *iv_return = UC_ERR_FETCH_UNMAPPED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_FETCH_UNMAPPED", 21)) {
     /*                      ^                    */
+#ifdef 21
       *iv_return = UC_MEM_FETCH_UNMAPPED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'R':
     if (memEQ(name, "UC_ERR_READ_UNALIGNED", 21)) {
     /*                      ^                    */
+#ifdef 16
       *iv_return = UC_ERR_READ_UNALIGNED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'W':
     if (memEQ(name, "UC_ERR_WRITE_UNMAPPED", 21)) {
     /*                      ^                    */
+#ifdef 7
       *iv_return = UC_ERR_WRITE_UNMAPPED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MEM_WRITE_UNMAPPED", 21)) {
     /*                      ^                    */
+#ifdef 20
       *iv_return = UC_MEM_WRITE_UNMAPPED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case '_':
     if (memEQ(name, "UC_HOOK_MEM_READ_PROT", 21)) {
     /*                      ^                    */
+#ifdef 1 << 7
       *iv_return = UC_HOOK_MEM_READ_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_MODE_LITTLE_ENDIAN", 21)) {
     /*                      ^                    */
+#if 0
       *iv_return = UC_MODE_LITTLE_ENDIAN;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -576,27 +824,43 @@ constant_22 (pTHX_ const char *name, IV *iv_return) {
   case 'E':
     if (memEQ(name, "UC_HOOK_MEM_WRITE_PROT", 22)) {
     /*                               ^            */
+#ifdef 1 << 8
       *iv_return = UC_HOOK_MEM_WRITE_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'H':
     if (memEQ(name, "UC_HOOK_MEM_FETCH_PROT", 22)) {
     /*                               ^            */
+#ifdef 1 << 9
       *iv_return = UC_HOOK_MEM_FETCH_PROT;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 'L':
     if (memEQ(name, "UC_ERR_FETCH_UNALIGNED", 22)) {
     /*                               ^            */
+#ifdef 18
       *iv_return = UC_ERR_FETCH_UNALIGNED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     if (memEQ(name, "UC_ERR_WRITE_UNALIGNED", 22)) {
     /*                               ^            */
+#ifdef 17
       *iv_return = UC_ERR_WRITE_UNALIGNED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   }
@@ -622,84 +886,84 @@ use ExtUtils::Constant qw (constant_types C_constant XS_constant);
 my $types = {map {($_, 1)} qw(IV)};
 my @names = (qw(),
             {name=>"UC_ARCH_ARM", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_ARM64", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_M68K", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_MAX", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_MIPS", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_PPC", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_SPARC", type=>"IV", macro=>"1"},
-            {name=>"UC_ARCH_X86", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_ARCH", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_ARG", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_EXCEPTION", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_FETCH_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_FETCH_UNALIGNED", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_FETCH_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_HANDLE", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_HOOK", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_HOOK_EXIST", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_INSN_INVALID", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_MAP", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_MODE", type=>"IV", macro=>"1"},
+            {name=>"UC_ARCH_ARM64", type=>"IV", macro=>"2"},
+            {name=>"UC_ARCH_M68K", type=>"IV", macro=>"7"},
+            {name=>"UC_ARCH_MAX", type=>"IV", macro=>"8"},
+            {name=>"UC_ARCH_MIPS", type=>"IV", macro=>"3"},
+            {name=>"UC_ARCH_PPC", type=>"IV", macro=>"5"},
+            {name=>"UC_ARCH_SPARC", type=>"IV", macro=>"6"},
+            {name=>"UC_ARCH_X86", type=>"IV", macro=>"4"},
+            {name=>"UC_ERR_ARCH", type=>"IV", macro=>"2"},
+            {name=>"UC_ERR_ARG", type=>"IV", macro=>"15"},
+            {name=>"UC_ERR_EXCEPTION", type=>"IV", macro=>"21"},
+            {name=>"UC_ERR_FETCH_PROT", type=>"IV", macro=>"14"},
+            {name=>"UC_ERR_FETCH_UNALIGNED", type=>"IV", macro=>"18"},
+            {name=>"UC_ERR_FETCH_UNMAPPED", type=>"IV", macro=>"8"},
+            {name=>"UC_ERR_HANDLE", type=>"IV", macro=>"3"},
+            {name=>"UC_ERR_HOOK", type=>"IV", macro=>"9"},
+            {name=>"UC_ERR_HOOK_EXIST", type=>"IV", macro=>"19"},
+            {name=>"UC_ERR_INSN_INVALID", type=>"IV", macro=>"10"},
+            {name=>"UC_ERR_MAP", type=>"IV", macro=>"11"},
+            {name=>"UC_ERR_MODE", type=>"IV", macro=>"4"},
             {name=>"UC_ERR_NOMEM", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_OK", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_READ_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_READ_UNALIGNED", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_READ_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_RESOURCE", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_VERSION", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_WRITE_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_WRITE_UNALIGNED", type=>"IV", macro=>"1"},
-            {name=>"UC_ERR_WRITE_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_BLOCK", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_CODE", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_INSN", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_INTR", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_FETCH", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_FETCH_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_FETCH_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_READ", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_READ_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_READ_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_WRITE", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_WRITE_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_HOOK_MEM_WRITE_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_FETCH", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_FETCH_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_FETCH_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_READ", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_READ_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_READ_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_WRITE", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_WRITE_PROT", type=>"IV", macro=>"1"},
-            {name=>"UC_MEM_WRITE_UNMAPPED", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_16", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_32", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_64", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_ARM", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_BIG_ENDIAN", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_LITTLE_ENDIAN", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MCLASS", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MICRO", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MIPS3", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MIPS32", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MIPS32R6", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_MIPS64", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_PPC32", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_PPC64", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_QPX", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_SPARC32", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_SPARC64", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_THUMB", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_V8", type=>"IV", macro=>"1"},
-            {name=>"UC_MODE_V9", type=>"IV", macro=>"1"},
-            {name=>"UC_PROT_ALL", type=>"IV", macro=>"1"},
-            {name=>"UC_PROT_EXEC", type=>"IV", macro=>"1"},
-            {name=>"UC_PROT_NONE", type=>"IV", macro=>"1"},
+            {name=>"UC_ERR_OK", type=>"IV", macro=>"0"},
+            {name=>"UC_ERR_READ_PROT", type=>"IV", macro=>"13"},
+            {name=>"UC_ERR_READ_UNALIGNED", type=>"IV", macro=>"16"},
+            {name=>"UC_ERR_READ_UNMAPPED", type=>"IV", macro=>"6"},
+            {name=>"UC_ERR_RESOURCE", type=>"IV", macro=>"20"},
+            {name=>"UC_ERR_VERSION", type=>"IV", macro=>"5"},
+            {name=>"UC_ERR_WRITE_PROT", type=>"IV", macro=>"12"},
+            {name=>"UC_ERR_WRITE_UNALIGNED", type=>"IV", macro=>"17"},
+            {name=>"UC_ERR_WRITE_UNMAPPED", type=>"IV", macro=>"7"},
+            {name=>"UC_HOOK_BLOCK", type=>"IV", macro=>"1 << 3"},
+            {name=>"UC_HOOK_CODE", type=>"IV", macro=>"1 << 2"},
+            {name=>"UC_HOOK_INSN", type=>"IV", macro=>"1 << 1"},
+            {name=>"UC_HOOK_INTR", type=>"IV", macro=>"1 << 0"},
+            {name=>"UC_HOOK_MEM_FETCH", type=>"IV", macro=>"1 << 12"},
+            {name=>"UC_HOOK_MEM_FETCH_PROT", type=>"IV", macro=>"1 << 9"},
+            {name=>"UC_HOOK_MEM_FETCH_UNMAPPED", type=>"IV", macro=>"1 << 6"},
+            {name=>"UC_HOOK_MEM_READ", type=>"IV", macro=>"1 << 10"},
+            {name=>"UC_HOOK_MEM_READ_PROT", type=>"IV", macro=>"1 << 7"},
+            {name=>"UC_HOOK_MEM_READ_UNMAPPED", type=>"IV", macro=>"1 << 4"},
+            {name=>"UC_HOOK_MEM_WRITE", type=>"IV", macro=>"1 << 11"},
+            {name=>"UC_HOOK_MEM_WRITE_PROT", type=>"IV", macro=>"1 << 8"},
+            {name=>"UC_HOOK_MEM_WRITE_UNMAPPED", type=>"IV", macro=>"1 << 5"},
+            {name=>"UC_MEM_FETCH", type=>"IV", macro=>"18"},
+            {name=>"UC_MEM_FETCH_PROT", type=>"IV", macro=>"24"},
+            {name=>"UC_MEM_FETCH_UNMAPPED", type=>"IV", macro=>"21"},
+            {name=>"UC_MEM_READ", type=>"IV", macro=>"16"},
+            {name=>"UC_MEM_READ_PROT", type=>"IV", macro=>"23"},
+            {name=>"UC_MEM_READ_UNMAPPED", type=>"IV", macro=>"19"},
+            {name=>"UC_MEM_WRITE", type=>"IV", macro=>"17"},
+            {name=>"UC_MEM_WRITE_PROT", type=>"IV", macro=>"22"},
+            {name=>"UC_MEM_WRITE_UNMAPPED", type=>"IV", macro=>"20"},
+            {name=>"UC_MODE_16", type=>"IV", macro=>"1 << 1"},
+            {name=>"UC_MODE_32", type=>"IV", macro=>"1 << 2"},
+            {name=>"UC_MODE_64", type=>"IV", macro=>"1 << 3"},
+            {name=>"UC_MODE_ARM", type=>"IV", macro=>"0"},
+            {name=>"UC_MODE_BIG_ENDIAN", type=>"IV", macro=>"1 << 30"},
+            {name=>"UC_MODE_LITTLE_ENDIAN", type=>"IV", macro=>"0"},
+            {name=>"UC_MODE_MCLASS", type=>"IV", macro=>"1 << 5"},
+            {name=>"UC_MODE_MICRO", type=>"IV", macro=>"1 << 4"},
+            {name=>"UC_MODE_MIPS3", type=>"IV", macro=>"1 << 5"},
+            {name=>"UC_MODE_MIPS32", type=>"IV", macro=>"1 << 2"},
+            {name=>"UC_MODE_MIPS32R6", type=>"IV", macro=>"1 << 6"},
+            {name=>"UC_MODE_MIPS64", type=>"IV", macro=>"1 << 3"},
+            {name=>"UC_MODE_PPC32", type=>"IV", macro=>"1 << 2"},
+            {name=>"UC_MODE_PPC64", type=>"IV", macro=>"1 << 3"},
+            {name=>"UC_MODE_QPX", type=>"IV", macro=>"1 << 4"},
+            {name=>"UC_MODE_SPARC32", type=>"IV", macro=>"1 << 2"},
+            {name=>"UC_MODE_SPARC64", type=>"IV", macro=>"1 << 3"},
+            {name=>"UC_MODE_THUMB", type=>"IV", macro=>"1 << 4"},
+            {name=>"UC_MODE_V8", type=>"IV", macro=>"1 << 6"},
+            {name=>"UC_MODE_V9", type=>"IV", macro=>"1 << 4"},
+            {name=>"UC_PROT_ALL", type=>"IV", macro=>"7"},
+            {name=>"UC_PROT_EXEC", type=>"IV", macro=>"4"},
+            {name=>"UC_PROT_NONE", type=>"IV", macro=>"0"},
             {name=>"UC_PROT_READ", type=>"IV", macro=>"1"},
-            {name=>"UC_PROT_WRITE", type=>"IV", macro=>"1"},
+            {name=>"UC_PROT_WRITE", type=>"IV", macro=>"2"},
             {name=>"UC_QUERY_MODE", type=>"IV", macro=>"1"},
-            {name=>"UC_QUERY_PAGE_SIZE", type=>"IV", macro=>"1"});
+            {name=>"UC_QUERY_PAGE_SIZE", type=>"IV", macro=>"2"});
 
 print constant_types(), "\n"; # macro defs
 foreach (C_constant ("UnicornEngine", 'constant', 'IV', $types, undef, 3, @names) ) {
@@ -713,8 +977,12 @@ __END__
   switch (len) {
   case 9:
     if (memEQ(name, "UC_ERR_OK", 9)) {
+#if 0
       *iv_return = UC_ERR_OK;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 10:
@@ -749,23 +1017,35 @@ __END__
     case 'D':
       if (memEQ(name, "UC_MODE_BIG_ENDIAN", 18)) {
       /*                    ^                   */
+#ifdef 1 << 30
         *iv_return = UC_MODE_BIG_ENDIAN;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     case 'E':
       if (memEQ(name, "UC_QUERY_PAGE_SIZE", 18)) {
       /*                    ^                   */
+#ifdef 2
         *iv_return = UC_QUERY_PAGE_SIZE;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     }
     break;
   case 19:
     if (memEQ(name, "UC_ERR_INSN_INVALID", 19)) {
+#ifdef 10
       *iv_return = UC_ERR_INSN_INVALID;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 20:
@@ -776,15 +1056,23 @@ __END__
     case 'M':
       if (memEQ(name, "UC_MEM_READ_UNMAPPED", 20)) {
       /*                    ^                     */
+#ifdef 19
         *iv_return = UC_MEM_READ_UNMAPPED;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     case 'R':
       if (memEQ(name, "UC_ERR_READ_UNMAPPED", 20)) {
       /*                    ^                     */
+#ifdef 6
         *iv_return = UC_ERR_READ_UNMAPPED;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     }
@@ -797,8 +1085,12 @@ __END__
     break;
   case 25:
     if (memEQ(name, "UC_HOOK_MEM_READ_UNMAPPED", 25)) {
+#ifdef 1 << 4
       *iv_return = UC_HOOK_MEM_READ_UNMAPPED;
       return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
     }
     break;
   case 26:
@@ -809,15 +1101,23 @@ __END__
     case 'E':
       if (memEQ(name, "UC_HOOK_MEM_WRITE_UNMAPPED", 26)) {
       /*                               ^                */
+#ifdef 1 << 5
         *iv_return = UC_HOOK_MEM_WRITE_UNMAPPED;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     case 'H':
       if (memEQ(name, "UC_HOOK_MEM_FETCH_UNMAPPED", 26)) {
       /*                               ^                */
+#ifdef 1 << 6
         *iv_return = UC_HOOK_MEM_FETCH_UNMAPPED;
         return PERL_constant_ISIV;
+#else
+        return PERL_constant_NOTDEF;
+#endif
       }
       break;
     }
