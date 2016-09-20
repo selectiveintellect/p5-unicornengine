@@ -183,7 +183,7 @@ our @EXPORT = qw(
 	UC_QUERY_PAGE_SIZE
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.01_1';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()

@@ -7,11 +7,15 @@ my $alien = Alien::UnicornEngine->new;
 WriteMakefile(
     NAME              => 'UnicornEngine',
     VERSION_FROM      => 'lib/UnicornEngine.pm', # finds $VERSION
+    CONFIGURE_REQUIRES => {
+        'ExtUtils::MakeMaker' => 0,
+    },
     PREREQ_PM         => {
         'Alien::UnicornEngine' => 0,
-        'ExtUtils::MakeMaker' => 0,
-        'Test::More' => 0,
     }, # e.g., Module::Name => 1.1
+    BUILD_REQUIRES  => {
+        'Test::More' => 0,
+    },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/UnicornEngine.pm', # retrieve abstract from module
        AUTHOR         => 'Vikas Kumar <vikas@cpan.org>') : ()),
@@ -20,6 +24,17 @@ WriteMakefile(
     INC               => $alien->cflags(),
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url => 'https://github.com/selectiveintellect/p5-alien-capstone',
+            },
+            bugtracker => 'https://github.com/selectiveintellect/p5-alien-capstone/issues',
+        },
+    },
+    LICENSE => 'perl',
 );
 if  (eval {require ExtUtils::Constant; 1}) {
   # If you edit these definitions to change the constants used by this module,
