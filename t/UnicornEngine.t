@@ -51,6 +51,8 @@ ok( $fail == 0 , 'Constants' );
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 ok(&UnicornEngine::is_arch_supported(UC_ARCH_ARM) == 1, 'ARM is supported');
+note &UnicornEngine::version();
+is(&UnicornEngine::version(), '1.0', 'Version is 1.0');
 
 done_testing();
 __END__
