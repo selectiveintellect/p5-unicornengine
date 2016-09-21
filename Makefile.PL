@@ -12,6 +12,7 @@ WriteMakefile(
     },
     PREREQ_PM         => {
         'Alien::UnicornEngine' => 0,
+        'Math::Int64' => 0,
     }, # e.g., Module::Name => 1.1
     BUILD_REQUIRES  => {
         'Test::More' => 0,
