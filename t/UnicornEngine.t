@@ -99,8 +99,8 @@ my $regions = $uce->mem_regions;
 is(ref $regions, 'ARRAY', 'Regions is an array ref');
 note(Dumper $regions);
 foreach (@$regions) {
-#    ok($uce->mem_unmap($_->{begin}, ($_->{end} - $_->{begin} + 1)) == 1,
-#        sprintf ("memory unmapped at 0x%08x", $_->{begin}));
+    ok($uce->mem_unmap($_->{begin}, $_->{end}) == 1,
+        sprintf ("memory unmapped at 0x%08x", $_->{begin}));
 }
 
 done_testing();

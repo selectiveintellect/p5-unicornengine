@@ -535,7 +535,7 @@ our @EXPORT = qw(
 	UC_ARM_REG_IP
 );
 
-our $VERSION = '0.01_2';
+our $VERSION = '0.02';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -606,7 +606,7 @@ sub mem_map {
 }
 
 sub mem_unmap {
-    return uc_perl_mem_unmap($_[0]->{uc_perl}, $_[1], $_[2]);
+    return uc_perl_mem_unmap($_[0]->{uc_perl}, $_[1], $_[2] - $_[1] + 1);
 }
 
 sub mem_protect {
@@ -650,118 +650,38 @@ __END__
 
 =head1 NAME
 
-UnicornEngine - Perl extension for blah blah blah
+UnicornEngine - Perl extension for Unicorn Engine from C<http://unicorn-engine.org>
 
 =head1 SYNOPSIS
 
-  use UnicornEngine;
-  blah blah blah
+    use UnicornEngine;
+
+    my $uc = UnicornEngine->new(arch => UC_ARCH_X86, mode => UC_MODE_32);
+    my $addr = 0x80000000;
+    $uc->mem_map($addr, 2 * 1024 * 1024);
+    my $code = "\x31\xc9\x90\x90"; ## xor ecx, ecx; nop; nop;
+    $uc->mem_write($addr, $code);
+    $uce->reg_write(UC_X86_REG_ECX, 0xdeadbeef);
+    $uce->emu_start(begin => $address, end => $addr + length($code));
+    $uce->reg_read(UC_X86_REG_ECX);
+    my $regions = $uc->mem_regions;
+    foreach (@$regions) {
+        $uce->mem_unmap($_->{begin}, $_->{end});
+    }
+      
+
 
 =head1 DESCRIPTION
 
-Stub documentation for UnicornEngine, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-Blah blah blah.
+Refer documentation for UnicornEngine at C<http://unicorn-engine.org>
 
-=head2 EXPORT
-
-None by default.
-
-=head2 Exportable constants
-
-  UC_ARCH_ARM
-  UC_ARCH_ARM64
-  UC_ARCH_M68K
-  UC_ARCH_MAX
-  UC_ARCH_MIPS
-  UC_ARCH_PPC
-  UC_ARCH_SPARC
-  UC_ARCH_X86
-  UC_ERR_ARCH
-  UC_ERR_ARG
-  UC_ERR_EXCEPTION
-  UC_ERR_FETCH_PROT
-  UC_ERR_FETCH_UNALIGNED
-  UC_ERR_FETCH_UNMAPPED
-  UC_ERR_HANDLE
-  UC_ERR_HOOK
-  UC_ERR_HOOK_EXIST
-  UC_ERR_INSN_INVALID
-  UC_ERR_MAP
-  UC_ERR_MODE
-  UC_ERR_NOMEM
-  UC_ERR_OK
-  UC_ERR_READ_PROT
-  UC_ERR_READ_UNALIGNED
-  UC_ERR_READ_UNMAPPED
-  UC_ERR_RESOURCE
-  UC_ERR_VERSION
-  UC_ERR_WRITE_PROT
-  UC_ERR_WRITE_UNALIGNED
-  UC_ERR_WRITE_UNMAPPED
-  UC_HOOK_BLOCK
-  UC_HOOK_CODE
-  UC_HOOK_INSN
-  UC_HOOK_INTR
-  UC_HOOK_MEM_FETCH
-  UC_HOOK_MEM_FETCH_PROT
-  UC_HOOK_MEM_FETCH_UNMAPPED
-  UC_HOOK_MEM_READ
-  UC_HOOK_MEM_READ_PROT
-  UC_HOOK_MEM_READ_UNMAPPED
-  UC_HOOK_MEM_WRITE
-  UC_HOOK_MEM_WRITE_PROT
-  UC_HOOK_MEM_WRITE_UNMAPPED
-  UC_MEM_FETCH
-  UC_MEM_FETCH_PROT
-  UC_MEM_FETCH_UNMAPPED
-  UC_MEM_READ
-  UC_MEM_READ_PROT
-  UC_MEM_READ_UNMAPPED
-  UC_MEM_WRITE
-  UC_MEM_WRITE_PROT
-  UC_MEM_WRITE_UNMAPPED
-  UC_MODE_16
-  UC_MODE_32
-  UC_MODE_64
-  UC_MODE_ARM
-  UC_MODE_BIG_ENDIAN
-  UC_MODE_LITTLE_ENDIAN
-  UC_MODE_MCLASS
-  UC_MODE_MICRO
-  UC_MODE_MIPS3
-  UC_MODE_MIPS32
-  UC_MODE_MIPS32R6
-  UC_MODE_MIPS64
-  UC_MODE_PPC32
-  UC_MODE_PPC64
-  UC_MODE_QPX
-  UC_MODE_SPARC32
-  UC_MODE_SPARC64
-  UC_MODE_THUMB
-  UC_MODE_V8
-  UC_MODE_V9
-  UC_PROT_ALL
-  UC_PROT_EXEC
-  UC_PROT_NONE
-  UC_PROT_READ
-  UC_PROT_WRITE
-  UC_QUERY_MODE
-  UC_QUERY_PAGE_SIZE
-
+All constants are exported for X86 and ARM. SPARC/MIPS/ARM64/M68K not supported
+yet.
 
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+L<Capstone>, L<Keystone>, L<Alien::UnicornEngine>
 
 =head1 AUTHOR
 
