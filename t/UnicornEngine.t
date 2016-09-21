@@ -40,6 +40,7 @@ foreach my $constname (qw(
     UC_HOOK_MEM_UNMAPPED UC_HOOK_MEM_READ_INVALID
     UC_HOOK_MEM_WRITE_INVALID UC_HOOK_MEM_FETCH_INVALID
     UC_HOOK_MEM_INVALID UC_HOOK_MEM_VALID
+    UC_X86_REG_ECX
     )) {
   next if (eval "my \$a = $constname; 1");
   if ($@ =~ /^Your vendor has not defined UnicornEngine macro $constname/) {
@@ -87,11 +88,11 @@ ok($uce->mem_map($address, 2 * 1024 * 1024) == 1, "memory mapped at $address");
 # write to memory
 my $code = "\x31\xc9\x90\x90";
 ok($uce->mem_write($address, $code), "memory written at $address");
-# write a register ECX is 22
-ok($uce->reg_write(22, 0xdeadbeef) == 1, 'ECX is written');
+# write a register ECX
+ok($uce->reg_write(UC_X86_REG_ECX, 0xdeadbeef) == 1, 'ECX is written');
 $uce->emu_start(begin => $address, end => $address + length($code));
 # read register ECX
-my $ecx = $uce->reg_read(22);
+my $ecx = $uce->reg_read(UC_X86_REG_ECX);
 is($ecx, 0, sprintf("ECX is read as 0x%08x\n", $ecx));
 # perform unmapping 
 my $regions = $uce->mem_regions;
