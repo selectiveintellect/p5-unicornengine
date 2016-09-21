@@ -20,7 +20,7 @@ INCLUDE: const-xs.inc
 
 unsigned int
 is_arch_supported(arch)
-    uc_arch arch 
+    uc_arch arch
     CODE:
         RETVAL = (uc_arch_supported(arch) ? 1 : 0);
     OUTPUT:
@@ -66,16 +66,20 @@ uc_perl_new(parent, arch, mode)
         RETVAL = (uc_perl_t *)calloc(1, sizeof(uc_perl_t));
         if (RETVAL) {
             RETVAL->perl = Perl_get_context();
-            RETVAL->parent = (void *)SvREFCNT_inc(parent);
             err = uc_open(arch, mode, &engine);
             if (err == UC_ERR_OK) {
                 RETVAL->engine = engine;
+                RETVAL->parent = (void *)SvREFCNT_inc(parent);
             } else {
                 RETVAL->engine = NULL;
+                RETVAL->parent = NULL;
                 warn("Error in creating uc_engine. Error: %s", uc_strerror(err));
+                free(RETVAL);
+                XSRETURN_UNDEF;
             }
         } else {
             Perl_croak(aTHX_ "Out of memory allocating uc_perl_t object\n");
+            XSRETURN_UNDEF;
         }
     OUTPUT:
         RETVAL
@@ -98,3 +102,86 @@ uc_perl_DESTROY(obj)
         }
 
 
+unsigned long
+uc_perl_query(obj,qtype)
+    uc_perl_t *obj
+    uc_query_type qtype
+    PREINIT:
+        size_t result = 0;
+    CODE:
+        if (obj && obj->engine) {
+            uc_err err = uc_query(obj->engine, qtype, &result);
+            if (err == UC_ERR_OK) {
+                RETVAL = (unsigned long)result;
+            } else {
+                warn("Error in querying uc_engine. Error: %s", uc_strerror(err));
+                XSRETURN_UNDEF;
+            }
+        }
+    OUTPUT:
+        RETVAL
+
+uc_err
+uc_perl_errno(obj)
+    uc_perl_t *obj
+    CODE:
+        if (obj && obj->engine) {
+            RETVAL = uc_errno(obj->engine);
+        }
+    OUTPUT:
+        RETVAL
+
+int
+uc_perl_reg_write(obj,regid,value)
+    uc_perl_t *obj
+    int regid
+    void *value
+    CODE:
+        if (obj && obj->engine) {
+            uc_err err = uc_reg_write(obj->engine, regid, (const void *)value);
+            if (err != UC_ERR_OK) {
+                warn("Error in writing register to uc_engine. Error: %s", uc_strerror(err));
+                XSRETURN_UNDEF;
+            } else {
+                RETVAL = 1;
+            }
+        }
+    OUTPUT:
+        RETVAL
+
+void *
+uc_perl_reg_read(obj,regid)
+    uc_perl_t *obj
+    int regid
+    CODE:
+        if (obj && obj->engine) {
+            void *value = NULL;
+            uc_err err = uc_reg_read(obj->engine, regid, &value);
+            if (err != UC_ERR_OK) {
+                warn("Error in reading register from uc_engine. Error: %s", uc_strerror(err));
+                XSRETURN_UNDEF;
+            } else {
+                RETVAL = value;
+            }
+        }
+    OUTPUT:
+        RETVAL
+
+int
+uc_perl_mem_map(obj,address,size,perms)
+    uc_perl_t *obj
+    unsigned long address
+    size_t size
+    unsigned int perms
+    CODE:
+        if (obj && obj->engine) {
+            uc_err err = uc_mem_map(obj->engine, (uint64_t)address, size, (uint32_t)perms);
+            if (err != UC_ERR_OK) {
+                warn("Error in memory mapping region at address 0x%08x. Error: %s", address, uc_strerror(err));
+                XSRETURN_UNDEF;
+            } else {
+                RETVAL = 1;
+            }
+        }
+    OUTPUT:
+        RETVAL

@@ -97,6 +97,13 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 	UC_PROT_WRITE
 	UC_QUERY_MODE
 	UC_QUERY_PAGE_SIZE
+    UC_HOOK_MEM_VALID
+    UC_HOOK_MEM_INVALID
+    UC_HOOK_MEM_PROT
+    UC_HOOK_MEM_UNMAPPED
+    UC_HOOK_MEM_READ_INVALID
+    UC_HOOK_MEM_WRITE_INVALID
+    UC_HOOK_MEM_FETCH_INVALID
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
@@ -230,6 +237,7 @@ sub new {
         return undef;
     }
     my $obj = uc_perl_new($self, $args{arch}, $args{mode});
+    return undef unless $obj;
     $self->{uc_perl} = $obj;
     return $self;
 }
@@ -237,6 +245,29 @@ sub new {
 sub DESTROY {
     uc_perl_DESTROY($_[0]->{uc_perl}) if $_[0]->{uc_perl};
 }
+
+sub query {
+    return uc_perl_query($_[0]->{uc_perl}, $_[1]);
+}
+
+sub errno {
+    return uc_perl_errno($_[0]->{uc_perl});
+}
+
+sub reg_write {
+    return uc_perl_reg_write($_[0]->{uc_perl}, $_[1], $_[2]);
+}
+
+sub reg_read {
+    return uc_perl_reg_read($_[0]->{uc_perl}, $_[1]);
+}
+
+sub mem_map {
+    return uc_perl_mem_map($_[0]->{uc_perl}, $_[1],
+                            $_[2], $_[3]);
+}
+
+
 
 
 # Autoload methods go after =cut, and are processed by the autosplit program.

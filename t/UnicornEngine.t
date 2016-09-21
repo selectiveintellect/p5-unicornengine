@@ -33,7 +33,11 @@ foreach my $constname (qw(
 	UC_MODE_MIPS32 UC_MODE_MIPS32R6 UC_MODE_MIPS64 UC_MODE_PPC32
 	UC_MODE_PPC64 UC_MODE_QPX UC_MODE_SPARC32 UC_MODE_SPARC64 UC_MODE_THUMB
 	UC_MODE_V8 UC_MODE_V9 UC_PROT_ALL UC_PROT_EXEC UC_PROT_NONE
-	UC_PROT_READ UC_PROT_WRITE UC_QUERY_MODE UC_QUERY_PAGE_SIZE)) {
+	UC_PROT_READ UC_PROT_WRITE UC_QUERY_MODE UC_QUERY_PAGE_SIZE
+    UC_HOOK_MEM_UNMAPPED UC_HOOK_MEM_READ_INVALID
+    UC_HOOK_MEM_WRITE_INVALID UC_HOOK_MEM_FETCH_INVALID
+    UC_HOOK_MEM_INVALID UC_HOOK_MEM_VALID
+    )) {
   next if (eval "my \$a = $constname; 1");
   if ($@ =~ /^Your vendor has not defined UnicornEngine macro $constname/) {
     print "# pass: $@";
@@ -56,6 +60,17 @@ is(&UnicornEngine::version(), '1.0', 'Version is 1.0');
 
 is(UnicornEngine->new(), undef, 'UnicornEngine object not created if arch/mode not specified');
 my $uce = new_ok('UnicornEngine', [ arch => UC_ARCH_X86, mode => UC_MODE_64 ]);
+can_ok($uce, 'query');
+my $query = $uce->query(UC_QUERY_MODE);
+is($query, undef, "UC_QUERY_MODE => undef for non ARM architectures");
+$query = $uce->query(UC_QUERY_PAGE_SIZE);
+isnt($query, undef, "UC_QUERY_PAGE_SIZE => $query");
+can_ok($uce, 'errno');
+is($uce->errno, UC_ERR_OK, 'No errors');
+can_ok($uce, 'reg_write');
+can_ok($uce, 'reg_read');
+can_ok($uce, 'mem_map');
+ok($uce->mem_map(0x1000000, 2 * 1024 * 1024, UC_PROT_ALL) == 1, 'Mem mapped at 0x1000000');
 
 done_testing();
 __END__
