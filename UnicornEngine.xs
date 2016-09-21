@@ -146,30 +146,11 @@ int
 uc_perl_reg_write(obj,regid,input)
     uc_perl_t *obj
     int regid
-    SV* input 
+    uint64_t input
     CODE:
         if (obj && obj->engine) {
-            void *value = NULL;
-            double v_d = nan("");
-            uint32_t v_u32 = 0;
-            uint64_t v_u64 = 0;
-            if (SvIOK(input) || SvUOK(input)) {
-                v_u32 = SvUV(input);
-                value = &v_u32;
-                value = SvPVbyte_nolen(input);
-                fprintf(stderr,"write value(32) = %u\n", v_u32);
-            } else if (SvI64OK(input) || SvU64OK(input)) {
-                v_u64 = SvU64(input);
-                value = &v_u64;
-                fprintf(stderr,"write value(64) = %lu\n", v_u64);
-            } else if (SvNOK(input)) {
-                v_d = SvNV(input);
-                value = &v_d;
-                fprintf(stderr,"write value(80) = %lf\n", v_d);
-            } else {
-                value = SvPVbyte_nolen(input);
-                fprintf(stderr, "write value(s) = %s\n", value);
-            }
+            void *value = &input;
+            //fprintf(stderr, "input (%d) = %lu\n", regid, input);
             uc_err err = uc_reg_write(obj->engine, regid, &value);
             if (err != UC_ERR_OK) {
                 warn("Error in writing register to uc_engine. Error: %s", uc_strerror(err));
@@ -195,8 +176,8 @@ uc_perl_reg_read(obj,regid)
                 warn("Error in reading register from uc_engine. Error: %s", uc_strerror(err));
                 XSRETURN_UNDEF;
             } else {
-                fprintf(stderr, "read value = %lu\n", value);
-                RETVAL = newSVuv(value);
+                //fprintf(stderr, "read value for %d = %lu\n", regid, value);
+                RETVAL = newSVu64(value);
             }
         } else {
             XSRETURN_UNDEF;
@@ -253,9 +234,10 @@ uc_perl_mem_write(obj,address,buffer)
     CODE:
         if (obj && obj->engine) {
             if (SvOK(buffer)) {
-                STRLEN size = 0;
-                char *bytes = SvPVbyte(buffer, size);
-                uc_err err = uc_mem_write(obj->engine, address, (void *)bytes, (size_t)size);
+                size_t size = 0;
+                uint8_t *bytes = SvPVbyte(buffer, size);
+                //fprintf(stderr, "[%s:%d] size: %zu\n", __func__, __LINE__, size);
+                uc_err err = uc_mem_write(obj->engine, address, bytes, size);
                 if (err != UC_ERR_OK) {
                     warn("Failed to write memory at address 0x%08x. Error: %s", address, uc_strerror(err));
                     XSRETURN_UNDEF;

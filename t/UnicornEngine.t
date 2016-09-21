@@ -10,7 +10,7 @@ use warnings;
 
 use Test::More;
 use Data::Dumper;
-use Math::Int64;
+use Math::Int64 qw(int64 uint64);
 BEGIN { use_ok('UnicornEngine') };
 $| = 1;
 
@@ -62,7 +62,7 @@ note &UnicornEngine::version();
 is(&UnicornEngine::version(), '1.0', 'Version is 1.0');
 
 is(UnicornEngine->new(), undef, 'UnicornEngine object not created if arch/mode not specified');
-my $uce = new_ok('UnicornEngine', [ arch => UC_ARCH_X86, mode => UC_MODE_64 ]);
+my $uce = new_ok('UnicornEngine', [ arch => UC_ARCH_X86, mode => UC_MODE_32 ]);
 can_ok($uce, 'query');
 my $query = $uce->query(UC_QUERY_PAGE_SIZE);
 isnt($query, undef, "UC_QUERY_PAGE_SIZE => $query");
@@ -71,26 +71,36 @@ is($query, undef, "UC_QUERY_MODE => undef for non ARM architectures");
 can_ok($uce, 'errno');
 is($uce->errno, UC_ERR_OK, 'No errors');
 can_ok($uce, 'reg_write');
-ok($uce->reg_write(22, 0xefabcdef) == 1, 'ECX is written');
 can_ok($uce, 'reg_read');
-#my $ecx = $uce->reg_read(22);
-#is($ecx, 0, "ECX is read as $ecx");
 can_ok($uce, 'mem_map');
-ok($uce->mem_map(0x1000000, 2 * 1024 * 1024) == 1, 'Mem mapped at 0x1000000');
 can_ok($uce, 'mem_regions');
-my $regions = $uce->mem_regions;
-is(ref $regions, 'ARRAY', 'Regions is an array ref');
-note(Dumper $regions);
 can_ok($uce, 'mem_unmap');
-foreach (@$regions) {
-    ok($uce->mem_unmap($_->{begin}, ($_->{end} - $_->{begin} + 1)) == 1,
-        sprintf ("memory unmapped at 0x%08x", $_->{begin}));
-}
 can_ok($uce, 'mem_read');
 can_ok($uce, 'mem_write');
 can_ok($uce, 'mem_protect');
 can_ok($uce, 'emu_start');
 can_ok($uce, 'emu_stop');
+# map an address range
+my $address = 0x01000000;
+ok($uce->mem_map($address, 2 * 1024 * 1024) == 1, "memory mapped at $address");
+
+# write to memory
+my $code = "\x31\xc9\x90\x90";
+ok($uce->mem_write($address, $code), "memory written at $address");
+# write a register ECX is 22
+ok($uce->reg_write(22, 0xdeadbeef) == 1, 'ECX is written');
+$uce->emu_start(begin => $address, end => $address + length($code));
+# read register ECX
+my $ecx = $uce->reg_read(22);
+is($ecx, 0, sprintf("ECX is read as 0x%08x\n", $ecx));
+# perform unmapping 
+my $regions = $uce->mem_regions;
+is(ref $regions, 'ARRAY', 'Regions is an array ref');
+note(Dumper $regions);
+foreach (@$regions) {
+#    ok($uce->mem_unmap($_->{begin}, ($_->{end} - $_->{begin} + 1)) == 1,
+#        sprintf ("memory unmapped at 0x%08x", $_->{begin}));
+}
 
 done_testing();
 __END__
