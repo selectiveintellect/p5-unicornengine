@@ -70,7 +70,7 @@ is($uce->errno, UC_ERR_OK, 'No errors');
 can_ok($uce, 'reg_write');
 can_ok($uce, 'reg_read');
 can_ok($uce, 'mem_map');
-ok($uce->mem_map(0x1000000, 2 * 1024 * 1024, UC_PROT_ALL) == 1, 'Mem mapped at 0x1000000');
+ok($uce->mem_map(0x1000000, 2 * 1024 * 1024) == 1, 'Mem mapped at 0x1000000');
 
 done_testing();
 __END__

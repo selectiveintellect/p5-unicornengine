@@ -264,7 +264,7 @@ sub reg_read {
 
 sub mem_map {
     return uc_perl_mem_map($_[0]->{uc_perl}, $_[1],
-                            $_[2], $_[3]);
+                            $_[2], $_[3] || UC_PROT_ALL());
 }
 
 
