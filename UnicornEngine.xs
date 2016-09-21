@@ -3,6 +3,8 @@
 #include "XSUB.h"
 
 #include "ppport.h"
+#define MATH_INT64_NATIVE_IF_AVAILABLE
+#include "perl_math_int64.h"
 
 #include <unicorn/unicorn.h>
 
@@ -17,6 +19,9 @@ typedef struct uc_perl_t {
 MODULE = UnicornEngine		PACKAGE = UnicornEngine		
 
 INCLUDE: const-xs.inc
+
+BOOT:
+    PERL_MATH_INT64_LOAD_OR_CROAK;
 
 unsigned int
 is_arch_supported(arch)
@@ -102,7 +107,7 @@ uc_perl_DESTROY(obj)
         }
 
 
-unsigned long
+size_t
 uc_perl_query(obj,qtype)
     uc_perl_t *obj
     uc_query_type qtype
@@ -112,7 +117,7 @@ uc_perl_query(obj,qtype)
         if (obj && obj->engine) {
             uc_err err = uc_query(obj->engine, qtype, &result);
             if (err == UC_ERR_OK) {
-                RETVAL = (unsigned long)result;
+                RETVAL = result;
             } else {
                 warn("Error in querying uc_engine. Error: %s", uc_strerror(err));
                 XSRETURN_UNDEF;
@@ -170,12 +175,12 @@ uc_perl_reg_read(obj,regid)
 int
 uc_perl_mem_map(obj,address,size,perms)
     uc_perl_t *obj
-    unsigned long address
+    uint64_t address
     size_t size
-    unsigned int perms
+    uint32_t perms
     CODE:
         if (obj && obj->engine) {
-            uc_err err = uc_mem_map(obj->engine, (uint64_t)address, size, (uint32_t)perms);
+            uc_err err = uc_mem_map(obj->engine, address, size, perms);
             if (err != UC_ERR_OK) {
                 warn("Error in memory mapping region at address 0x%08x. Error: %s", address, uc_strerror(err));
                 XSRETURN_UNDEF;

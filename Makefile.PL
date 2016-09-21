@@ -23,7 +23,7 @@ WriteMakefile(
     DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
     INC               => $alien->cflags(),
 	# Un-comment this if you add C files to link with later:
-    # OBJECT            => '$(O_FILES)', # link all the C files too
+     OBJECT            => '$(O_FILES)',# link all the C files too
     META_MERGE => {
         'meta-spec' => { version => 2 },
         resources => {
