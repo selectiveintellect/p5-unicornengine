@@ -30,9 +30,9 @@ WriteMakefile(
         resources => {
             repository => {
                 type => 'git',
-                url => 'https://github.com/selectiveintellect/p5-alien-capstone',
+                url => 'https://github.com/selectiveintellect/p5-unicorn',
             },
-            bugtracker => 'https://github.com/selectiveintellect/p5-alien-capstone/issues',
+            bugtracker => 'https://github.com/selectiveintellect/p5-unicorn/issues',
         },
     },
     LICENSE => 'perl',

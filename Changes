@@ -1,5 +1,9 @@
 Revision history for Perl extension UnicornEngine.
 
+0.04
+    - Matching version numbers in Alien::UnicornEngine so that updates to either
+      will force rebuilding of both.
+
 0.02 
 
     - First release of UnicornEngine. Most functions implemented. X86/ARM
