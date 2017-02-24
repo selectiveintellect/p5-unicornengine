@@ -1,5 +1,8 @@
 Revision history for Perl extension UnicornEngine.
 
+0.05
+    - Configure requirements are now handled better
+
 0.04
     - Matching version numbers in Alien::UnicornEngine so that updates to either
       will force rebuilding of both.

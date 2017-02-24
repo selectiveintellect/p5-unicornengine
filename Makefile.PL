@@ -10,9 +10,11 @@ WriteMakefile(
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
         'File::ShareDir' => 0,
+        'File::Copy' => 0,
+        'File::Spec' => 0,
     },
     PREREQ_PM         => {
-        'Alien::UnicornEngine' => 0,
+        'Alien::UnicornEngine' => 0.04,
         'Math::Int64' => 0,
     }, # e.g., Module::Name => 1.1
     BUILD_REQUIRES  => {
