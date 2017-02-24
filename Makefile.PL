@@ -9,6 +9,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/UnicornEngine.pm', # finds $VERSION
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
+        'File::ShareDir' => 0,
     },
     PREREQ_PM         => {
         'Alien::UnicornEngine' => 0,
